@@ -1,0 +1,46 @@
+version: '3'
+services:
+  db:
+    restart: always
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    ports:
+      - "${DB_PORT_DEVELOPMENT}:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE_DEVELOPMENT}
+      POSTGRES_USER: ${DB_USERNAME_DEVELOPMENT}
+      POSTGRES_PASSWORD: ${DB_PASSWORD_DEVELOPMENT}
+    env_file:
+      - .env
+
+  redis:
+    build: ./redis
+    ports:
+      - "${REDIS_PORT_DEVELOPMENT}:6379"
+
+  app:
+    restart: always
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "${API_SERVER_PORT_DEVELOPMENT}:3000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      WAIT_HOSTS: ${DB_HOST_DEVELOPMENT}:${DB_PORT_DEVELOPMENT}, ${REDIS_HOST_DEVELOPMENT}:${REDIS_PORT_DEVELOPMENT}
+    env_file:
+      - .env
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"

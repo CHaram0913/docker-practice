@@ -1,0 +1,4 @@
+{
+  "watch": ["usr/app/"],
+  "ext": "js"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "docker-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node /usr/app",
+    "start:dev": "nodemon /usr/app --config /usr/app/nodemon.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "pg": "^7.12.1",
+    "redis": "^2.8.0"
+  }
+}
