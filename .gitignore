@@ -200,3 +200,6 @@ fabric.properties
 ### Serverless ###
 # Ignore build directory
 .serverless
+
+### Others ###
+*.DS_Store

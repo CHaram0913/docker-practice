@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node /usr/app",
-    "start:dev": "nodemon /usr/app --config /usr/app/nodemon.json"
+    "start:dev": "nodemon /usr/app --config /usr/app/nodemon.json",
+    "test": "echo 'asdf'"
   },
   "author": "",
   "license": "ISC",
