@@ -1,21 +1,28 @@
 {
   "name": "docker-practice",
   "version": "1.0.0",
-  "description": "",
+  "description": "Docker Compose practice boiler plate server.",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node /usr/app",
     "start:dev": "nodemon /usr/app --config /usr/app/nodemon.json",
-    "test": "echo 'asdf'"
+    "test": "NODE_ENV=test jest --coverage"
   },
-  "author": "",
+  "author": "CHaram0913",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "knex": "^0.20.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "objection": "^1.6.11",
     "pg": "^7.12.1",
     "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2"
   }
 }

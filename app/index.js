@@ -4,6 +4,8 @@ const express = require('express');
 const http = require('http');
 
 const config = require('./configs');
+const router = require('./routes');
+const { responseFormatter } = require('./utils/middlewares');
 
 /**
  * SERVER CONFIG
@@ -17,13 +19,12 @@ const server = http.createServer(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({ origin: '*' }));
+app.use(responseFormatter);
 
 /**
- * ROOT ROUTE FOR CONNECTION TEST
+ * ROUTERS
  */
-app.get('/', async (req, res, next) => {
-  return res.json({ success: true });
-});
+app.use(router);
 
 /**
  * LISTEN

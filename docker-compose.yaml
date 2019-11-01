@@ -14,13 +14,14 @@ services:
     env_file:
       - .env
 
+  # TODO : FIX TEST DB
   db_test:
     restart: always
     build:
       context: ./db
       dockerfile: Dockerfile
     ports:
-      - "${DB_PORT_TEST}:5432"
+      - "${DB_PORT_TEST}:5433"
     environment:
       POSTGRES_DB: ${DB_DATABASE_TEST}
       POSTGRES_USER: ${DB_USERNAME_TEST}

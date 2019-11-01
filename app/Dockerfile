@@ -4,10 +4,16 @@ RUN yarn global add nodemon
 
 WORKDIR /usr/app
 COPY package*.json /usr/app/
-COPY yarn*.lock /usr/app/
-RUN yarn && mv /usr/app/node_modules /node_modules
+RUN yarn
 
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.6.0/wait /wait
-RUN chmod +x /wait
+COPY . /usr/app
 
-CMD /wait && yarn start:dev
+RUN /bin/sh -c "apk add --no-cache bash"
+
+COPY ./scripts/wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+
+COPY ./scripts/start-development-environment.sh /start-development-environment.sh
+RUN chmod +x /start-development-environment.sh
+
+CMD /start-development-environment.sh ${DB_HOST_DEVELOPMENT} ${DB_PORT_DEVELOPMENT} ${REDIS_HOST_DEVELOPMENT} ${REDIS_PORT_DEVELOPMENT}
