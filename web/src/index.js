@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import reduxThunk from 'redux-thunk';
+import { applyMiddleware, createStore } from 'redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { Provider } from 'react-redux';
 
-import * as serviceWorker from './serviceWorker';
 import { App } from './containers';
+import * as serviceWorker from './serviceWorker';
+import reducers from './reducers';
 import './index.css';
-
-const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
-  // uri: process.env.API_ENDPOINT_DEVELOPMENT,
-});
 
 const theme = createMuiTheme({
   typography: {
@@ -20,12 +17,14 @@ const theme = createMuiTheme({
   },
 });
 
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <Provider store={store}>
     <MuiThemeProvider theme={theme}>
-      <App/>
+      <App />
     </MuiThemeProvider>
-  </ApolloProvider>,
+  </Provider>,
   document.getElementById('root'),
 );
 

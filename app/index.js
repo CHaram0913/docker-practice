@@ -12,18 +12,18 @@ const app = express();
 const server = http.createServer(app);
 
 /**
- * ROOT ROUTE FOR CONNECTION TEST
- */
-app.get('/', async (req, res, next) => {
-  return res.json({ success: true });
-});
-
-/**
  * MIDDLEWARES
  */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({ origin: '*' }));
+
+/**
+ * ROOT ROUTE FOR CONNECTION TEST
+ */
+app.get('/', async (req, res, next) => {
+  return res.json({ success: true });
+});
 
 /**
  * LISTEN
