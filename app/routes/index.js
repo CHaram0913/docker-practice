@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
  */
 
 router.use((req, res, next) => {
-  return res.status(404).fail(null, 'Resource is not availble. Please check the endpoint again.');
+  return res.status(404).fail(null, 'Resource is not available. Please check the endpoint again.');
 });
 
 router.use((err, req, res, next) => {
